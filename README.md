@@ -1,5 +1,8 @@
 # Sensor Field
 
+<!-- CI/CD pipeline test commit -->
+
+
 Browser dashboard for connecting to Bluetooth Low Energy (BLE) sensors, viewing live measurements, comparing readings, and storing history. This repository is currently a **starter blueprint**: the intended architecture, contracts, UX, and developer workflow are documented here; application code is not yet scaffolded.
 
 ## Problem
