@@ -1,5 +1,7 @@
 .worktrees/
 docs/superpowers/
+AGENTS.md
+CLAUDE.md
 
 # dependencies
 /node_modules
