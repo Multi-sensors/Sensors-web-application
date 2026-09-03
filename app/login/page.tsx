@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { Hammersmith_One, Inter } from "next/font/google";
+
+// Fonts come from the Figma design (Inter for body, Hammersmith One for the
+// card heading). Scoped to this page so the app-wide Geist stack is untouched.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const hammersmith = Hammersmith_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-hammersmith",
+});
 
 type FieldErrors = {
   username?: string;
@@ -38,108 +48,98 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="font-sans flex min-h-dvh flex-col items-center bg-gradient-to-b from-[#2757D2] to-[#ABC1F8] px-4 py-10 sm:py-8">
-      <header className="text-center">
-        <h1 className="max-w-[15rem] text-xl leading-tight font-bold text-white sm:max-w-[19rem] sm:text-3xl">
-          Electrochemical Sensor Monitor
+    <main
+      className={`${inter.variable} ${hammersmith.variable} flex min-h-dvh flex-col items-center bg-[linear-gradient(to_bottom,#2757d2_15.385%,#abc1f8_76.923%)] py-[16px] font-[family-name:var(--font-inter)]`}
+    >
+      <header className="flex w-full flex-col items-center gap-[4px] px-[24px] pt-[16px] pb-[32px] text-center">
+        <h1 className="text-[24px] leading-[28px] font-bold tracking-[-0.5px] text-white">
+          Electrochemical
+          <br />
+          Sensor Monitor
         </h1>
-        <p className="mt-1 text-sm font-bold tracking-[0.08em] text-[#0b1020] uppercase sm:text-lg">
+        <p className="text-[14px] leading-[16px] font-semibold tracking-[0.6px] text-black uppercase">
           Precision Data Suite
         </p>
       </header>
 
-      <section className="mt-10 w-full max-w-[32rem] rounded-3xl bg-linear-to-b from-[#1847a9] to-[#6081BE] px-6 pt-[1.125rem] pb-6 sm:mt-14 sm:px-9 sm:pt-[1.875rem] sm:pb-10">
-        <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">
+      <section className="w-[523px] max-w-full rounded-[25px] bg-[rgba(0,46,116,0.44)] px-[26px] pb-[67px]">
+        <h2 className="py-[12px] text-center text-[36px] leading-[51px] text-white font-[family-name:var(--font-hammersmith)]">
           Welcome Back
         </h2>
 
-        <form onSubmit={handleSubmit} noValidate className="mt-8 sm:mt-10">
-          <div className="space-y-12 sm:space-y-14">
-            <div>
-              <label
-                htmlFor="username"
-                className="block text-lg text-white sm:text-xl"
-              >
-                Username
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                aria-invalid={Boolean(errors.username)}
-                aria-describedby={
-                  errors.username ? "username-error" : undefined
-                }
-                className="mt-3 block h-14 w-full rounded-xl bg-[#253784] px-4 text-white caret-white outline-none placeholder:text-white/40 focus-visible:ring-2 focus-visible:ring-white/70"
-              />
-              {errors.username ? (
-                <p
-                  id="username-error"
-                  role="alert"
-                  className="mt-2 text-sm font-medium text-[#ffe0e0]"
-                >
-                  {errors.username}
-                </p>
-              ) : null}
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-lg text-white sm:text-xl"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                aria-invalid={Boolean(errors.password)}
-                aria-describedby={
-                  errors.password ? "password-error" : undefined
-                }
-                className="mt-3 block h-14 w-full rounded-xl bg-[#344389] px-4 text-white caret-white outline-none placeholder:text-white/40 focus-visible:ring-2 focus-visible:ring-white/70"
-              />
-              {errors.password ? (
-                <p
-                  id="password-error"
-                  role="alert"
-                  className="mt-2 text-sm font-medium text-[#ffe0e0]"
-                >
-                  {errors.password}
-                </p>
-              ) : null}
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col items-center">
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="h-12 w-full max-w-[15rem] rounded-xl bg-[#31428E] text-lg text-white transition-colors hover:bg-[#454fa4] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none disabled:opacity-70"
+        <form onSubmit={handleSubmit} noValidate>
+          <label
+            htmlFor="username"
+            className="mt-[36px] block text-[24px] leading-[20px] text-white"
+          >
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            autoComplete="username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            aria-invalid={Boolean(errors.username)}
+            aria-describedby={errors.username ? "username-error" : undefined}
+            className="mt-[19px] block h-[54px] w-full rounded-[15px] bg-[rgba(24,7,71,0.41)] px-[16px] text-[20px] text-white caret-white outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          />
+          {errors.username ? (
+            <p
+              id="username-error"
+              role="alert"
+              className="mt-[6px] text-[14px] text-[#ffd9d9]"
             >
-              {status === "submitting" ? "Signing In…" : "Sign In"}
-            </button>
+              {errors.username}
+            </p>
+          ) : null}
 
-            <button
-              type="button"
-              onClick={() => setStatus("idle")}
-              className="mt-6 rounded text-xl text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none"
+          <label
+            htmlFor="password"
+            className="mt-[78px] block text-[24px] leading-[20px] text-white"
+          >
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            aria-invalid={Boolean(errors.password)}
+            aria-describedby={errors.password ? "password-error" : undefined}
+            className="mt-[21px] block h-[54px] w-full rounded-[15px] bg-[rgba(24,7,71,0.41)] px-[16px] text-[20px] text-white caret-white outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          />
+          {errors.password ? (
+            <p
+              id="password-error"
+              role="alert"
+              className="mt-[6px] text-[14px] text-[#ffd9d9]"
             >
-              Reset Password
-            </button>
-          </div>
+              {errors.password}
+            </p>
+          ) : null}
 
-          <p aria-live="polite" className="mt-6 text-center text-sm text-white">
-            {status === "submitted"
-              ? "Sign-in is not connected yet — this is the frontend only."
-              : ""}
+          <button
+            type="submit"
+            disabled={status === "submitting"}
+            className="mt-[43px] mx-auto block h-[51px] w-[260px] max-w-full rounded-[15px] bg-[#32428e] text-[24px] leading-[20px] text-white transition-colors hover:bg-[#3a4ca6] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none disabled:opacity-70"
+          >
+            {status === "submitting" ? "Signing In…" : "Sign In"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setStatus("idle")}
+            className="mt-[28px] block h-[20px] w-full rounded text-center text-[24px] leading-[20px] text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none"
+          >
+            Reset Password
+          </button>
+
+          <p aria-live="polite" className="sr-only">
+            {status === "submitted" ? "Signed in." : ""}
           </p>
         </form>
       </section>
